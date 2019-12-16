@@ -1,0 +1,153 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#app {
+  margin: 8% 0 0 14%;
+}
+
+#header {
+  font-size: 40px;
+}
+
+#form-container {
+  margin: 0 0 0 35px;
+  padding: 0 0 25px 0;
+}
+
+.title {
+  font-size: 20px;;
+}
+
+.title-div {
+  padding: 0 0 10px 0;
+}
+
+.input {
+  font-size: 18px;
+}
+
+#add_button {
+  margin: 20px;
+  padding: 20px;
+}
+
+#add-button-appearance {
+  border-radius: 10% / 50%;  
+  background-color: rgb(16, 189, 189);
+  color: #fff;
+  padding: 10px;
+  margin: 20px 0 0 50px;
+  font-size:16px;
+}
+
+#add-button-appearance:hover {
+  background-color: rgb(15, 167, 167);
+}
+
+.filter {
+  width: 20%;
+  margin: 0 0 0 76%;
+}
+
+#sticky {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding-bottom: 20px;
+  border-bottom: rgb(205, 205, 205) 10px solid;
+  width: 75%;
+}
+
+.list-div {
+  width: 95%;
+}
+
+li {
+  list-style-type: none;
+  margin: 0 0 20px 0;
+}
+
+.outer-box {
+  border: 1px solid lightgray;
+  width: 75%;
+  display: table;
+}
+
+.inner-box {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 20px;
+}
+
+.input-checkbox {
+  margin: 0 0 0 10px;
+  height: 20px;
+  width: 20px;
+}
+
+.checkbox-wrapper .checkbox-tooltip-text {
+  visibility: hidden;
+}
+
+/* .checkbox-wrapper:hover .checkbox-tooltip-text {
+  visibility: visible;
+  font-size: 8px;
+  padding: 4px;
+  position: absolute;
+  margin: -32px -22px -22px -22px;
+} */
+
+.remove-button-appearance {
+  border-radius: 10% / 50%;  
+  background-color: rgb(211, 100, 100);
+  color: #fff;
+  font-size: 14px;
+  float: right;
+}
+
+.remove-button-appearance:hover {
+  background-color: rgb(140, 73, 73);
+}
+
+/* .remove-wrapper .remove-button-tooltip-text {
+  font-style: italic;
+  margin-bottom: 10px;
+  visibility: hidden;
+  font-size: 8px;
+  margin: -10px -25% 0 0;
+  float: right;
+} */
+
+/* .remove-button-wrapper:hover .remove-button-tooltip-text {
+  visibility: visible;
+} */
+
+.title-details-div {
+  /* padding: 0 100px 0 60px; */
+  margin: -20px 100px 0 60px;
+}
+
+.details-div {
+  padding: 10px 0 0 0;
+  font-size: 18px;
+}
+
+.notification {
+  font-weight: bold;
+  font-size: 20px;
+  float: right;
+}
+
+.complete {
+  background-color: rgb(225, 223, 223);
+  color: rgb(79, 79, 79);
+}
+
+.overdue {
+  background-color: rgb(244, 207, 207);
+}
+
+.due-today-tomorrow {
+  background-color: rgb(239, 250, 219);
+}
