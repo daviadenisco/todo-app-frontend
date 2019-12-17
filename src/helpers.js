@@ -3,7 +3,6 @@ import moment from 'moment';
 // checkOverdue and checkDueTodayTomorrow share these variables
 let today = moment();
 let tomorrow = moment().add(1, 'days');
-let emptyMessage = null;
 
 // checks whether dueDate is before today
 export function checkOverdue(todo) {
@@ -22,10 +21,5 @@ export function checkDueTodayTomorrow(todo) {
   if (!todo.complete && (moment(todo.date).isSame(today, 'day') || moment(todo.date).isSame(tomorrow, 'day'))) {
     isDueTodayTomorrow = true;
   }
-
   return isDueTodayTomorrow;
-}
-
-export function emptyMessageToReturn(emptyMessage) {
-  return emptyMessage;
 }

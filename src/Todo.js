@@ -10,7 +10,6 @@ function Todo({ todo, toggleCheckbox, removeTodo, emptyMessage }) {
   useEffect(() => {
     setOverdue(checkOverdue(todo));
     setDueTodayTomorrow(checkDueTodayTomorrow(todo));
-    console.log('TODO USE EFFECT TRIGGERED')
   }, [todo]);
 
   let message = null;
@@ -71,7 +70,7 @@ function Todo({ todo, toggleCheckbox, removeTodo, emptyMessage }) {
         </div>
       </li>
     </div>
-  )
+  );
 };
 
 export default Todo;
