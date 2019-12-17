@@ -12,6 +12,7 @@ function Todo({ todo, toggleCheckbox, removeTodo, emptyMessage }) {
     setDueTodayTomorrow(checkDueTodayTomorrow(todo));
   }, [todo]);
 
+  // sets teh message, name of class to use, and status for each todo
   let message = null;
   let nameForClass = '';
   function checkStatus() {
