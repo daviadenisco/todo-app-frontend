@@ -9,8 +9,10 @@ import axios from 'axios';
 import './App.css';
 import { setState } from 'expect/build/jestMatchersObject';
 
+// used to make calls to the backend
 const baseUrl = 'http://localhost:3001';
 
+// option for the filter feature
 const filteredOptions = [  
   { value: 'dueTodayTomorrow', label: 'Due soon' },
   { value: 'complete', label: 'Complete' },
@@ -19,6 +21,7 @@ const filteredOptions = [
   { value: 'viewAll', label: 'View all' },
 ];
 
+// used to reset the input fields in the form
 const initialFormValues = {
   title: '',
   date: moment(new Date()).format('YYYY-MM-DD'),
@@ -35,6 +38,7 @@ function App() {
     getTodos();
   }, []);
 
+  // gets the todos from the database, sorts them in due date order with completed todos at bottom of list
   const getTodos = () => {
     axios.get(`${baseUrl}/todos`)
       .then((response) => {
@@ -52,6 +56,7 @@ function App() {
       });
   };
 
+  // async await version of getTodos
   // const getTodos = async () => {
   //   let todos = await axios.get(`${baseUrl}/todos`)
   //   todos = todos.data;
@@ -64,6 +69,7 @@ function App() {
   //   setTodos(finalTodos);
   // }
 
+  // adds a todo, resets the form input field values, and updates the todos on the page
   const addTodo = () => {
     axios.post(`${baseUrl}/todos`, values)
       .then((response) => {
@@ -75,6 +81,8 @@ function App() {
       });
   };
 
+  // gets the values from the input fields in the form
+  // alerts keep app from crashing and tells user if too much text is in title or descriptions
   function captureFormInput(e) {
     const value = e.target.value;
     if (e.target.name === 'title') {
@@ -94,6 +102,7 @@ function App() {
     });
   };
 
+  // toggle complete for each todo, updates the todos when complete or incomplete
   function toggleCheckbox(id) {
     const updatedTodo = todos.find(todo =>{
       return todo.id === id;
@@ -109,6 +118,7 @@ function App() {
       });
   };
 
+  // removes a todo and updates the todos on the page
   function removeTodo(id) {
     axios.delete(`${baseUrl}/todos/${id}`)
       .then((response) => {
@@ -120,6 +130,7 @@ function App() {
       });
   };
 
+  // submits a new todo if title, date, and description are included or alerts the user that something is missing.
   function handleSubmit(e) {
     e.preventDefault();
     if (values.title && values.date && values.description) {
@@ -129,10 +140,12 @@ function App() {
     };
   };
 
+  // sets the filter selection
   const handleFilterSelect = option => {
     setSelectedFilter(option.value);
   };
 
+  // filters todo based on filter selection
   const filteredTodo = todos.filter(todo => {
     if (selectedFilter === 'overdue') {
       return checkOverdue(todo);
