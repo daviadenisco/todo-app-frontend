@@ -33,41 +33,43 @@ function App() {
 
   useEffect(() => {
     getTodos();
-  })
+    console.log('APP USE EFFECT TRIGGERED')
+  }, []);
 
-  // const getTodos = () => {
-  //   axios.get(`${baseUrl}/todos`)
-  //     .then((response) => {
-  //       const todos = response.data;
-  //       let incompleteTodos = todos.filter(todo => !todo.complete);
-  //       let completeTodos = todos.filter(todo => todo.complete);
-  //       let sortedTodos = incompleteTodos.sort(function(a, b) {
-  //         return new Date(a.date) - new Date(b.date);
-  //       })
-  //       let finalTodos = [...sortedTodos, ...completeTodos];
-  //       setTodos(finalTodos);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
-
-  const getTodos = async () => {
-    let todos = await axios.get(`${baseUrl}/todos`)
-    todos = todos.data;
-    let incompleteTodos = todos.filter(todo => !todo.complete);
-    let completeTodos = todos.filter(todo => todo.complete);
-    let sortedTodos = incompleteTodos.sort(function(a, b) {
-      return new Date(a.date) - new Date(b.date);
-    })
-    let finalTodos = [...sortedTodos, ...completeTodos];
-    setTodos(finalTodos);
+  const getTodos = () => {
+    axios.get(`${baseUrl}/todos`)
+      .then((response) => {
+        const todos = response.data;
+        let incompleteTodos = todos.filter(todo => !todo.complete);
+        let completeTodos = todos.filter(todo => todo.complete);
+        let sortedTodos = incompleteTodos.sort(function(a, b) {
+          return new Date(a.date) - new Date(b.date);
+        })
+        let finalTodos = [...sortedTodos, ...completeTodos];
+        setTodos(finalTodos);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
+
+  // const getTodos = async () => {
+  //   let todos = await axios.get(`${baseUrl}/todos`)
+  //   todos = todos.data;
+  //   let incompleteTodos = todos.filter(todo => !todo.complete);
+  //   let completeTodos = todos.filter(todo => todo.complete);
+  //   let sortedTodos = incompleteTodos.sort(function(a, b) {
+  //     return new Date(a.date) - new Date(b.date);
+  //   })
+  //   let finalTodos = [...sortedTodos, ...completeTodos];
+  //   setTodos(finalTodos);
+  // }
 
   const addTodo = () => {
     axios.post(`${baseUrl}/todos`, values)
       .then((response) => {
         setValues(initialFormValues);
+        getTodos();
       })
       .catch((err) => {
         console.log(err)
@@ -86,7 +88,6 @@ function App() {
         alert('Decription is too long. Please enter 1000 or fewer characters.');
       }
     } 
-  
     setValues({
       ...values,
       [e.target.name]: value,
@@ -102,6 +103,7 @@ function App() {
     axios.put(`${baseUrl}/todos/${id}`, updatedTodo)
       .then((response) => {
         console.log(response.data);
+        getTodos();
       })
       .catch((err) => {
         console.log(err)
@@ -112,6 +114,7 @@ function App() {
     axios.delete(`${baseUrl}/todos/${id}`)
       .then((response) => {
         console.log(response.data);
+        getTodos();
       }) 
       .catch((err) => {
         console.log(err)
@@ -121,21 +124,15 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
     if (values.title && values.date && values.description) {
-      addTodo()
+      addTodo();
     } else {
-      alert('A task must contain a title, description, and a due date. Please add the required information and then submit.')
+      alert('A task must contain a title, description, and a due date. Please add the required information and then submit.');
     }
   }
 
   const handleFilterSelect = option => {
     setSelectedFilter(option.value)
   }
-  
-  // let altText = 'Nothing here!'
-  // let noOverdueText = 'Nothing overdue, keep up the good work!';
-  // altText = 'Nothing due soon, go have some fun!';
-  // altText = "Nothing is complete, yet. Select 'View All' and tackle something on your list today!";
-
 
   const filteredTodo = todos.filter(todo => {
     if (selectedFilter === 'overdue') {
@@ -161,6 +158,7 @@ function App() {
           <TodoForm addTodo={addTodo} captureFormInput={captureFormInput} values={values} />
         </form>
         <div className='filter'>
+          Filter
           <Dropdown options={filteredOptions} onChange={handleFilterSelect} value={selectedFilter} placeholder="Select an option" />
         </div>
       </div>
@@ -169,7 +167,6 @@ function App() {
         {filteredTodo && filteredTodo.length ? filteredTodo.map((todo, index) => (
           <Todo key={todo.id} index={index} todo={todo} toggleCheckbox={toggleCheckbox} removeTodo={removeTodo} />
         )) : <div>Nothing here!</div>}
-
       </ul>
       </div>
     </div>
